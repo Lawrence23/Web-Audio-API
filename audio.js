@@ -1,12 +1,24 @@
-window.onload = init;
+window.onload = init("Sample.mp3");
 var context;
 var buffer,source1,gainNode,input,filter,analyser,request;
 var startOffset = 0;
 var startTime = 0;
 
 
-function init() {
+function init(url) {
+
 	context = new AudioContext();
+	request = new XMLHttpRequest();
+	request.open('GET', url, true);
+	request.responseType = 'arraybuffer';
+
+	// Decode asynchronously
+	request.onload = function() {
+		context.decodeAudioData(request.response, function(theBuffer) {
+	    	buffer = theBuffer;
+	  	}, onError);
+	}
+	request.send();
 }
 
 function LoadAudio(url) {
@@ -58,9 +70,9 @@ function pause() {
 }
 
 $(function() {
-	LoadAudio("Sample.mp3");
+	// LoadAudio("Sample.mp3");
 	$('#song1').click(function(event) {
-		LoadAudio("Sample.mp3");
+		// LoadAudio("Sample.mp3");
 		play();
 		// playSound(buffer);
 	});
