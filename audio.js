@@ -1,6 +1,6 @@
 window.onload = init;
 var context;
-var buffer,source,gainNode;
+var buffer,source,gainNode,input,filter,analyser;
 var startOffset = 0;
 var startTime = 0;
 
@@ -67,6 +67,14 @@ $(function() {
 		pause();
 		// playSound(buffer);
 	});
+	$('#rec').click(function(event) {
+		getLiveInput();
+		// playSound(buffer);
+	});
+	$('#playrec').click(function(event) {
+		playRec();
+		// playSound(buffer);
+	});
 	$('#volume').change(function() {
 		gainNode.gain.value = $('#volume').val() / 10;
 	});
@@ -88,28 +96,32 @@ function getLiveInput() {
 
 function onStream(stream) {
 	// Wrap a MediaStreamSourceNode around the live input stream.
-	var input = context.createMediaStreamSource(stream);
+	input = context.createMediaStreamSource(stream);
 	// Connect the input to a filter.
-	var filter = context.createBiquadFilter();
+	filter = context.createBiquadFilter();
 	filter.frequency.value = 60.0;
 	filter.type = filter.NOTCH;
 	filter.Q = 10.0;
 
-	var analyser = context.createAnalyser();
+	analyser = context.createAnalyser();
 
 	// Connect graph.
 	input.connect(filter);
 	filter.connect(analyser);
 
 	// Set up an animation.
-	requestAnimationFrame(render);
+	// requestAnimationFrame(render);
 };
 
 function onStreamError(e) {
   	console.error(e);
 };
 
-function render() {
-	// Visualize the live audio input.
-	requestAnimationFrame(render);
-};
+function playRec() {
+	analyser.connect(context.destination);
+	input.start(0);
+}
+// function render() {
+// 	// Visualize the live audio input.
+// 	requestAnimationFrame(render);
+// };
