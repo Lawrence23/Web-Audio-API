@@ -119,7 +119,8 @@ function onStreamError(e) {
 
 function playRec() {
 	analyser.connect(context.destination);
-	input.start(0);
+	souce.connect(input);
+	source.start(0);
 }
 // function render() {
 // 	// Visualize the live audio input.
