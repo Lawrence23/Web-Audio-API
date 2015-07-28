@@ -1,6 +1,6 @@
 window.onload = init;
 var context;
-var buffer,source1,gainNode,input,filter,analyser;
+var buffer,source1,gainNode,input,filter,analyser,request;
 var startOffset = 0;
 var startTime = 0;
 
@@ -10,7 +10,7 @@ function init() {
 }
 
 function LoadAudio(url) {
-	var request = new XMLHttpRequest();
+	request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.responseType = 'arraybuffer';
 
