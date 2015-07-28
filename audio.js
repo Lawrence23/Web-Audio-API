@@ -51,7 +51,7 @@ function play() {
 	source1 = context.createBufferSource();
 	// Connect graph
 	source1.buffer = this.buffer;
-	source1.loop = false;
+	source1.loop = true;
 	// Create a gain node.
 	gainNode = context.createGain();
 	// Connect the source to the gain node.
