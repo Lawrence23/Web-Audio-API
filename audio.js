@@ -1,4 +1,4 @@
-window.onload = init("Sample.mp3");
+window.onload = init("Sample3.mp3");
 var context;
 var buffer,source1,gainNode,input,filter,analyser,request;
 var startOffset = 0;
