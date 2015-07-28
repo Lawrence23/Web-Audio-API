@@ -9,8 +9,22 @@
 	<button id="song2">Pause</button>
 	<button id="rec">Record</button>
 	<button id="playrec">Play Record</button>
+
+	<div id="shown">Awaiting permission...</div>
+    <div id="hidden" style="display:none">
+      	<a id="record-toggle" href="#">Click me to record.</a><br/><br/>
+		
+      	Play back using the audio exported to a WAV blob & the &lt;audio&gt; tag.<br/>
+      	<audio id="recorded-audio" controls="controls"></audio><br/><br/>
+		
+      	<a id="webaudio-playback" href="#">Click me to play back using Web Audio.</a>
+    </div>
+
+
 	<input type="range" id="volume" min="0" max="20" value="10">
+
 	<script src="jquery-1.11.2.min.js"></script>
+	<script src="recorder.js"></script>
 	<script src="audio.js"></script>
 </body>
 </html>
