@@ -119,7 +119,7 @@ function onStreamError(e) {
 
 function playRec() {
 	analyser.connect(context.destination);
-	souce.connect(input);
+	source.connect(input);
 	source.start(0);
 }
 // function render() {
