@@ -81,7 +81,7 @@ $(function() {
 		// playSound(buffer);
 	});
 	$('#rec').click(function(event) {
-		getLiveInput();
+		playRec();
 		// playSound(buffer);
 	});
 	$('#playrec').click(function(event) {
