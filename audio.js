@@ -92,7 +92,7 @@ $(function() {
 	    $("a#record-toggle").text("Click me to re-record.");
 
 	    recorder.exportWAV(function(wav) {
-	      	var url = window.webkitURL.createObjectURL(wav);
+	      	var url = window.URL.createObjectURL(wav);
 	      	$("audio#recorded-audio").attr("src", url);
 	      	$("audio#recorded-audio").get()[0].load();
 	    });
