@@ -1,6 +1,6 @@
 window.onload = init;
 var context;
-var buffer,source,gainNode,input,filter,analyser;
+var buffer,source1,gainNode,input,filter,analyser;
 var startOffset = 0;
 var startTime = 0;
 
@@ -23,12 +23,12 @@ function LoadAudio(url) {
 	request.send();
 }
 
-function playSound(buffer) {
-	var source = context.createBufferSource();
-	source.buffer = buffer;
-	source.connect(context.destination);
-	source.start(0);
-}
+/*function playSound(buffer) {
+	var source1 = context.createBufferSource();
+	source1.buffer = buffer;
+	source1.connect(context.destination);
+	source1.start(0);
+}*/
 
 function onError(e) {
   	console.error(e);
@@ -36,23 +36,23 @@ function onError(e) {
 
 function play() {
 	startTime = context.currentTime;
-	source = context.createBufferSource();
+	source1 = context.createBufferSource();
 	// Connect graph
-	source.buffer = this.buffer;
-	source.loop = false;
+	source1.buffer = this.buffer;
+	source1.loop = false;
 	// Create a gain node.
 	gainNode = context.createGain();
 	// Connect the source to the gain node.
-	source.connect(gainNode);
+	source1.connect(gainNode);
 	// Connect the gain node to the destination.
 	gainNode.connect(context.destination);
 	// source.connect(context.destination);
 	// Start playback, but make sure we stay in bound of the buffer.
-	source.start(0, startOffset % buffer.duration);
+	source1.start(0, startOffset % buffer.duration);
 }
 
 function pause() {
-	source.stop();
+	source1.stop();
 	// Measure how much time passed since the last pause.
 	startOffset += context.currentTime - startTime;
 }
@@ -60,6 +60,7 @@ function pause() {
 $(function() {
 	LoadAudio("Sample.mp3");
 	$('#song1').click(function(event) {
+		LoadAudio("Sample.mp3");
 		play();
 		// playSound(buffer);
 	});
@@ -100,12 +101,12 @@ $(function() {
 
 	var playbackRecorderAudio = function (recorder, context) {
 	    recorder.getBuffer(function (buffers) {
-	      	var source = context.createBufferSource();
-	      	source.buffer = context.createBuffer(1, buffers[0].length, 44100);
-	      	source.buffer.getChannelData(0).set(buffers[0]);
-	      	source.buffer.getChannelData(0).set(buffers[1]);
-	      	source.connect(context.destination);
-	      	source.start(0);
+	      	var source2 = context.createBufferSource();
+	      	source2.buffer = context.createBuffer(1, buffers[0].length, 44100);
+	      	source2.buffer.getChannelData(0).set(buffers[0]);
+	      	source2.buffer.getChannelData(0).set(buffers[1]);
+	      	source2.connect(context.destination);
+	      	source2.start(0);
 	    });
 	}
 
@@ -113,9 +114,9 @@ $(function() {
 		$("#shown").toggle();
 	    $("#hidden").toggle();
 
-	    var audioContext = new AudioContext();
-	    var mediaStreamSource = audioContext.createMediaStreamSource( stream );
-	    mediaStreamSource.connect( audioContext.destination );
+	    // var audioContext = new AudioContext();
+	    var mediaStreamSource = context.createMediaStreamSource( stream );
+	    mediaStreamSource.connect( context.destination );
 
 	    var recorder = new Recorder(mediaStreamSource, {
 	      	workerPath: "recorderWorker.js"
