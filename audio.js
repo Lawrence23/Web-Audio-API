@@ -79,7 +79,7 @@ $(function() {
 		gainNode.gain.value = $('#volume').val() / 10;
 	});
 
-	
+
 	var startRecorder = function(recorder) {
 	    recorder.clear();
 	    recorder.record();
@@ -105,7 +105,7 @@ $(function() {
 	      	source.buffer.getChannelData(0).set(buffers[0]);
 	      	source.buffer.getChannelData(0).set(buffers[1]);
 	      	source.connect(context.destination);
-	      	source.noteOn(0);
+	      	source.start(0);
 	    });
 	}
 
@@ -113,7 +113,7 @@ $(function() {
 		$("#shown").toggle();
 	    $("#hidden").toggle();
 
-	    var audioContext = new webkitAudioContext();
+	    var audioContext = new AudioContext();
 	    var mediaStreamSource = audioContext.createMediaStreamSource( stream );
 	    mediaStreamSource.connect( audioContext.destination );
 
