@@ -122,38 +122,38 @@ $(function() {
 	    });
 	}
 
-	navigator.webkitGetUserMedia({"audio": true}, function(stream) {
-		$("#shown").toggle();
-	    $("#hidden").toggle();
+	// navigator.webkitGetUserMedia({"audio": true}, function(stream) {
+	// 	$("#shown").toggle();
+	//     $("#hidden").toggle();
 
-	    // var audioContext = new AudioContext();
-	    var mediaStreamSource = context.createMediaStreamSource( stream );
-	    mediaStreamSource.connect( context.destination );
+	//     // var audioContext = new AudioContext();
+	//     var mediaStreamSource = context.createMediaStreamSource( stream );
+	//     mediaStreamSource.connect( context.destination );
 
-	    var recorder = new Recorder(mediaStreamSource, {
-	      	workerPath: "recorderWorker.js"
-	    });
-	    var recording = false;
+	//     var recorder = new Recorder(mediaStreamSource, {
+	//       	workerPath: "recorderWorker.js"
+	//     });
+	//     var recording = false;
 
-	    $("a#record-toggle").click(function (e) {
-	    	e.preventDefault();
-	      	if (recording === false) {
-		        startRecorder(recorder);
-	        	recording = true;
-	      	}	
-	      	else {
-	        	stopRecorder(recorder);
-	        	recording = false;
-	      	}
-	    });
+	//     $("a#record-toggle").click(function (e) {
+	//     	e.preventDefault();
+	//       	if (recording === false) {
+	// 	        startRecorder(recorder);
+	//         	recording = true;
+	//       	}	
+	//       	else {
+	//         	stopRecorder(recorder);
+	//         	recording = false;
+	//       	}
+	//     });
 
-	    $("a#webaudio-playback").click(function (e) {
-	    	e.preventDefault();
-	      	playbackRecorderAudio(recorder, audioContext);
-	    })
-	}, function(error) {
-	    $("body").text("Error: you need to allow this sample to use the microphone.")
-	});
+	//     $("a#webaudio-playback").click(function (e) {
+	//     	e.preventDefault();
+	//       	playbackRecorderAudio(recorder, audioContext);
+	//     })
+	// }, function(error) {
+	//     $("body").text("Error: you need to allow this sample to use the microphone.")
+	// });
 })
 /*// Create the source.
 var source = context.createBufferSource();
