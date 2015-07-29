@@ -1,6 +1,6 @@
 window.onload = init("Sample3.mp3");
 var context;
-var buffer,source1,gainNode,input,filter,analyser,request;
+var buffer1,source1,gainNode,input,filter,analyser,request;
 var startOffset = 0;
 var startTime = 0;
 
@@ -15,7 +15,7 @@ function init(url) {
 	// Decode asynchronously
 	request.onload = function() {
 		context.decodeAudioData(request.response, function(theBuffer) {
-	    	buffer = theBuffer;
+	    	buffer1 = theBuffer;
 	  	}, onError);
 	}
 	request.send();
@@ -29,7 +29,7 @@ function LoadAudio(url) {
 	// Decode asynchronously
 	request.onload = function() {
 		context.decodeAudioData(request.response, function(theBuffer) {
-	    	buffer = theBuffer;
+	    	buffer1 = theBuffer;
 	  	}, onError);
 	}
 	request.send();
@@ -50,7 +50,7 @@ function play() {
 	startTime = context.currentTime;
 	source1 = context.createBufferSource();
 	// Connect graph
-	source1.buffer = this.buffer;
+	source1.buffer = this.buffer1;
 	source1.loop = true;
 	// Create a gain node.
 	gainNode = context.createGain();
@@ -113,13 +113,13 @@ $(function() {
 
 	var playbackRecorderAudio = function (recorder, context) {
 	    recorder.getBuffer(function (buffers) {
-	      	var source2 = context.createBufferSource();
-	      	source2.buffer = context.createBuffer(1, buffers[0].length, 44100);
-	      	source2.buffer.getChannelData(0).set(buffers[0]);
-	      	source2.buffer.getChannelData(0).set(buffers[1]);
-	      	source2.connect(context.destination);
+	      	// var source2 = context.createBufferSource();
+	      	source1.buffer = context.createBuffer(1, buffers[0].length, 44100);
+	      	source1.buffer.getChannelData(0).set(buffers[0]);
+	      	source1.buffer.getChannelData(0).set(buffers[1]);
+	      	source1.connect(context.destination);
+
 	      	source1.start(0);
-	      	source2.start(0);
 	    });
 	}
 
