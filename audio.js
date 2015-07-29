@@ -52,7 +52,7 @@ $(function() {
 	// LoadAudio("Sample.mp3");
 	$('#song1').click(function(event) {
 		// LoadAudio("Sample.mp3");
-		play();
+		play(recorder, context);
 		// playSound(buffer);
 	});
 	$('#song2').click(function(event) {
