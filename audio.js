@@ -46,29 +46,7 @@ function onError(e) {
   	console.error(e);
 }
 
-function play() {
-	startTime = context.currentTime;
-	source1 = context.createBufferSource();
-	// Connect graph
-	source1.buffer = this.buffer;
-	source1.loop = true;
-	// Create a gain node.
-	gainNode = context.createGain();
-	// Connect the source to the gain node.
-	source1.connect(gainNode);
-	// Connect the gain node to the destination.
-	gainNode.connect(context.destination);
-	// source.connect(context.destination);
-	// Start playback, but make sure we stay in bound of the buffer.
-	playbackRecorderAudio(recorder, context);
-	source1.start(0, startOffset % buffer.duration);
-}
 
-function pause() {
-	source1.stop();
-	// Measure how much time passed since the last pause.
-	startOffset += context.currentTime - startTime;
-}
 
 $(function() {
 	// LoadAudio("Sample.mp3");
@@ -93,7 +71,29 @@ $(function() {
 		gainNode.gain.value = $('#volume').val() / 10;
 	});
 
+	function play() {
+		startTime = context.currentTime;
+		source1 = context.createBufferSource();
+		// Connect graph
+		source1.buffer = this.buffer;
+		source1.loop = true;
+		// Create a gain node.
+		gainNode = context.createGain();
+		// Connect the source to the gain node.
+		source1.connect(gainNode);
+		// Connect the gain node to the destination.
+		gainNode.connect(context.destination);
+		// source.connect(context.destination);
+		// Start playback, but make sure we stay in bound of the buffer.
+		playbackRecorderAudio(recorder, context);
+		source1.start(0, startOffset % buffer.duration);
+	}
 
+	function pause() {
+		source1.stop();
+		// Measure how much time passed since the last pause.
+		startOffset += context.currentTime - startTime;
+	}
 	var startRecorder = function(recorder) {
 	    recorder.clear();
 	    recorder.record();
