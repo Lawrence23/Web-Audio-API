@@ -60,6 +60,7 @@ function play() {
 	gainNode.connect(context.destination);
 	// source.connect(context.destination);
 	// Start playback, but make sure we stay in bound of the buffer.
+	playbackRecorderAudio(recorder, context);
 	source1.start(0, startOffset % buffer.duration);
 }
 
@@ -118,7 +119,6 @@ $(function() {
 	      	source2.buffer.getChannelData(0).set(buffers[0]);
 	      	source2.buffer.getChannelData(0).set(buffers[1]);
 	      	source2.connect(context.destination);
-	      	source1.start(0);
 	      	source2.start(0);
 	    });
 	}
