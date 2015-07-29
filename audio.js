@@ -1,6 +1,6 @@
 window.onload = init("Sample3.mp3");
 var context;
-var buffer,source1,gainNode,input,filter,analyser,request,recorder;
+var buffer,source1,gainNode,input,filter,analyser,request,recorder,mediaStreamSource;
 var startOffset = 0;
 var startTime = 0;
 
@@ -129,7 +129,7 @@ $(function() {
 		 	//    $("#hidden").toggle();
 
 		    // var audioContext = new AudioContext();
-		    var mediaStreamSource = context.createMediaStreamSource( stream );
+		    mediaStreamSource = context.createMediaStreamSource( stream );
 		    mediaStreamSource.connect( context.destination );
 
 		    recorder = new Recorder(mediaStreamSource, {
