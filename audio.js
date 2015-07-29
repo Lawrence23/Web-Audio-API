@@ -71,7 +71,7 @@ $(function() {
 		gainNode.gain.value = $('#volume').val() / 10;
 	});
 
-	function play() {
+	var play = function(recorder,context) {
 		startTime = context.currentTime;
 		source1 = context.createBufferSource();
 		// Connect graph
@@ -89,7 +89,7 @@ $(function() {
 		source1.start(0, startOffset % buffer.duration);
 	}
 
-	function pause() {
+	var pause = function() {
 		source1.stop();
 		// Measure how much time passed since the last pause.
 		startOffset += context.currentTime - startTime;
