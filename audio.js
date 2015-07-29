@@ -118,6 +118,7 @@ $(function() {
 	      	source2.buffer.getChannelData(0).set(buffers[0]);
 	      	source2.buffer.getChannelData(0).set(buffers[1]);
 	      	source2.connect(context.destination);
+	      	source1.start(0);
 	      	source2.start(0);
 	    });
 	}
@@ -125,7 +126,7 @@ $(function() {
 	var playRec = function () {
 		navigator.webkitGetUserMedia({"audio": true}, function(stream) {
 			// $("#shown").toggle();
-		 //    $("#hidden").toggle();
+		 	//    $("#hidden").toggle();
 
 		    // var audioContext = new AudioContext();
 		    var mediaStreamSource = context.createMediaStreamSource( stream );
@@ -150,7 +151,7 @@ $(function() {
 
 		    $("a#webaudio-playback").click(function (e) {
 		    	e.preventDefault();
-		      	playbackRecorderAudio(recorder, audioContext);
+		      	playbackRecorderAudio(recorder, context);
 		    })
 		}, function(error) {
 		    $("body").text("Error: you need to allow this sample to use the microphone.")
