@@ -130,7 +130,7 @@ $(function() {
 
 		    // var audioContext = new AudioContext();
 		    mediaStreamSource = context.createMediaStreamSource( stream );
-		    mediaStreamSource.connect( context.destination );
+		    //mediaStreamSource.connect( context.destination );
 
 		    recorder = new Recorder(mediaStreamSource, {
 		      	workerPath: "recorderWorker.js"
@@ -140,10 +140,12 @@ $(function() {
 		    $("a#record-toggle").click(function (e) {
 		    	e.preventDefault();
 		      	if (recording === false) {
+		      		mediaStreamSource.connect( context.destination );
 			        startRecorder(recorder);
 		        	recording = true;
 		      	}	
 		      	else {
+		      		mediaStreamSource.disconnect(0);
 		        	stopRecorder(recorder);
 		        	recording = false;
 		      	}
